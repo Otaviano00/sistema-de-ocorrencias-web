@@ -3,11 +3,10 @@
 # `make` (ou `make help`) lista os alvos.
 .DEFAULT_GOAL := help
 .NOTPARALLEL:
-.PHONY: help up down logs reset seed install tdd refactor sonar
+.PHONY: help up down logs reset seed install tdd refactor
 
 API_DIR ?= ../sistema-de-ocorrencias-api
 COMPOSE := docker compose -f $(API_DIR)/docker-compose.yml
-SONAR_IMAGE := sonarsource/sonar-scanner-cli:12.4.0.4321_8.4.0
 
 # Arquivos gerados nos bind mounts ficam com o dono do usuário do host.
 export HOST_UID := $(shell id -u)
@@ -32,15 +31,5 @@ install: ## Instala pacotes no container web (evita Node do host): make install 
 tdd: ## Vitest (ng test) em modo watch, sem cobertura (ciclo Red/Green)
 	$(web_exec) npm run test:watch
 
-refactor: ## Prettier + ESLint --fix (gts + angular-eslint) + Vitest com cobertura + sonar-scanner
+refactor: ## Prettier + ESLint --fix (gts + angular-eslint) + Vitest com cobertura
 	$(web_exec) sh -c 'npm run format && npm run lint:fix && npm run test:cov'
-	@$(MAKE) --no-print-directory sonar
-
-sonar: ## Roda o sonar-scanner (binário local, ou via Docker se SONAR_TOKEN existir)
-	@if command -v sonar-scanner >/dev/null 2>&1; then \
-		sonar-scanner; \
-	elif [ -n "$${SONAR_TOKEN:-}" ]; then \
-		docker run --rm -e SONAR_HOST_URL -e SONAR_TOKEN -v "$(CURDIR):/usr/src" $(SONAR_IMAGE); \
-	else \
-		echo "sonar-scanner indisponível (instale-o ou exporte SONAR_TOKEN/SONAR_HOST_URL): análise ignorada."; \
-	fi

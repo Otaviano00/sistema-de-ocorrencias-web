@@ -33,7 +33,7 @@ sistema-de-ocorrencias/
 
 Depois do `make up`, abra <http://localhost:4200>. A API responde em <http://localhost:3000> e já aceita requisições do front-end (CORS liberado para `http://localhost:4200`).
 
-**Hot-reload:** salve qualquer arquivo em `src/` e o navegador atualiza sozinho. O primeiro build do Angular depois do `make up` leva alguns segundos.
+**Hot-reload:** salve qualquer arquivo em `src/` e o navegador atualiza sozinho.
 
 ### Instalar pacotes com segurança
 
@@ -57,13 +57,10 @@ O `package.json` e o `package-lock.json` são atualizados na sua máquina. Faça
    1. **Prettier**: formata `.ts`, `.html` e `.scss` no padrão Google.
    2. **ESLint** com `--fix`: regras do Google e do Angular. Corrige o que dá automaticamente e falha se sobrar algum erro.
    3. **Vitest com cobertura**: roda todos os testes e gera `coverage/lcov.info` (abra `coverage/lcov-report/index.html` no navegador para ver o relatório).
-   4. **SonarQube**: roda o `sonar-scanner`, se estiver disponível (veja abaixo).
 
    Se uma etapa falhar, as seguintes não rodam. Corrija e rode de novo.
 
 `make tdd` e `make refactor` usam o container do front-end se ele estiver no ar. Se o ambiente estiver parado, eles criam um container temporário só para isso.
-
-**SonarQube:** `make refactor` (ou só `make sonar`) usa o `sonar-scanner` instalado na sua máquina. Se ele não existir, mas as variáveis `SONAR_HOST_URL` e `SONAR_TOKEN` estiverem exportadas, a análise roda via Docker. Sem nenhum dos dois, a etapa é pulada com um aviso. A configuração fica em `sonar-project.properties`.
 
 ### Onde fica cada configuração
 
@@ -73,9 +70,8 @@ O `package.json` e o `package-lock.json` são atualizados na sua máquina. Faça
 | ESLint | `eslint.config.mjs` | `gts` + `angular-eslint` (inclusive acessibilidade nos templates). Inclui `eslint-config-prettier`, então não conflita com o Prettier. |
 | Prettier | `.prettierrc`, `.prettierignore` | Aspas simples, vírgula no final, sem espaço dentro de `{}`. HTML formatado com o parser do Angular. |
 | Vitest + cobertura | `angular.json` (alvo `test`), `vitest.config.mts` | O `ng test` roda o Vitest. A cobertura sai em `coverage/lcov.info`. |
-| SonarQube | `sonar-project.properties` | Analisa `src/` e lê `coverage/lcov.info`. |
 | Docker (dev) | `Dockerfile.dev` | Orquestrado pelo `docker-compose.yml` do repositório da API. |
-| Versão do Node | `.nvmrc`, `engines` no `package.json` | Node 24. |
+| Versão do Node | `.nvmrc`, `engines` no `package.json` | Node 24.22.3 (mesma versão da imagem Docker). |
 
 ### Por que usar `make` em vez de `npm` direto na máquina?
 

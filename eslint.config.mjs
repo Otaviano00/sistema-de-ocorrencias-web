@@ -9,13 +9,7 @@ import gts from 'gts';
 const scriptFiles = ['**/*.{ts,js,mjs,cjs}'];
 
 export default defineConfig([
-  globalIgnores([
-    'dist/',
-    'coverage/',
-    '.angular/',
-    '.scannerwork/',
-    'public/',
-  ]),
+  globalIgnores(['dist/', 'coverage/', '.angular/', 'public/']),
   // Restringe o gts a TS/JS: os templates HTML ficam com as regras do Angular.
   ...gts.map(config => ({files: config.files ?? scriptFiles, ...config})),
   {
