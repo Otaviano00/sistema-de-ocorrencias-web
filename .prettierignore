@@ -1,0 +1,5 @@
+dist
+coverage
+.angular
+.scannerwork
+package-lock.json
