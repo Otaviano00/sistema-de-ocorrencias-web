@@ -62,6 +62,18 @@ O `package.json` e o `package-lock.json` são atualizados na sua máquina. Faça
 
 `make tdd` e `make refactor` usam o container do front-end se ele estiver no ar. Se o ambiente estiver parado, eles criam um container temporário só para isso.
 
+### Integração contínua (GitHub Actions)
+
+O workflow `.github/workflows/ci.yml` roda a cada push na `main` ou na `dev` e em todo pull request para a `main` ou a `dev`. Se você enviar um novo commit, a execução anterior do mesmo PR é cancelada. O CI **só verifica**: ele não formata nem corrige nada. Por isso, rode `make refactor` antes de dar push.
+
+Ele usa o Node da versão em `.nvmrc` e confere, nesta ordem:
+
+1. `npm ci`: instala as dependências exatamente como estão no `package-lock.json`.
+2. **Prettier** (`--check`): falha se algum arquivo não estiver formatado.
+3. **ESLint**: falha com qualquer erro **ou aviso** das regras do Google e do Angular.
+4. **Build de produção** (`npm run build`): falha se houver erro de tipo ou de template.
+5. **Testes unitários com cobertura** (`coverage/lcov.info`, que fica disponível como artefato `coverage` na página da execução por 7 dias).
+
 ### Onde fica cada configuração
 
 | Ferramenta | Arquivo | Observação |
@@ -71,6 +83,7 @@ O `package.json` e o `package-lock.json` são atualizados na sua máquina. Faça
 | Prettier | `.prettierrc`, `.prettierignore` | Aspas simples, vírgula no final, sem espaço dentro de `{}`. HTML formatado com o parser do Angular. |
 | Vitest + cobertura | `angular.json` (alvo `test`), `vitest.config.mts` | O `ng test` roda o Vitest. A cobertura sai em `coverage/lcov.info`. |
 | Docker (dev) | `Dockerfile.dev` | Orquestrado pelo `docker-compose.yml` do repositório da API. |
+| CI | `.github/workflows/ci.yml` | Verificações de todo PR (veja acima). |
 | Versão do Node | `.nvmrc`, `engines` no `package.json` | Node 24.22.3 (mesma versão da imagem Docker). |
 
 ### Por que usar `make` em vez de `npm` direto na máquina?
