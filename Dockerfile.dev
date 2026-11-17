@@ -1,0 +1,22 @@
+# Imagem de DESENVOLVIMENTO (ng serve com hot-reload, código via bind mount).
+FROM node:24.22.3-bookworm-slim
+
+# Alinha o usuário 'node' ao UID/GID do host para que arquivos gerados no bind
+# mount (.angular/, coverage/) não fiquem com dono root.
+ARG UID=1000
+ARG GID=1000
+RUN groupmod -o -g "${GID}" node && usermod -o -u "${UID}" -g "${GID}" node
+
+WORKDIR /app
+RUN chown node:node /app
+USER node
+
+# Só os manifestos entram na imagem: o código chega pelo bind mount do compose.
+COPY --chown=node:node package.json package-lock.json .npmrc ./
+RUN npm ci --no-audit --no-fund && npm cache clean --force
+
+ENV NODE_ENV=development \
+    NG_CLI_ANALYTICS=false
+EXPOSE 4200
+
+CMD ["npx", "ng", "serve", "--host", "0.0.0.0", "--port", "4200"]

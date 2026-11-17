@@ -1,0 +1,62 @@
+# CI do front-end: só verificações (nada é formatado, corrigido ou publicado).
+# Roda em push na main e na dev, e em todo PR para a main ou a dev.
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+  workflow_dispatch:
+
+# Um novo push no mesmo PR/branch cancela a execução anterior.
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Formatação, lint, build e testes
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    env:
+      NG_CLI_ANALYTICS: 'false'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci --no-audit --no-fund
+
+      - name: Prettier (check)
+        run: npm run format:check
+
+      - name: ESLint (Google TypeScript Style + Angular)
+        run: npm run lint -- --max-warnings=0
+
+      - name: Build de produção
+        run: npm run build
+
+      # Vitest com jsdom (angular.json → vitest.config.mts): não precisa de navegador.
+      - name: Testes unitários com cobertura
+        run: npm run test:cov
+
+      - name: Publicar relatório de cobertura
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage
+          path: coverage/
+          retention-days: 7
+          if-no-files-found: ignore
