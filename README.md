@@ -87,7 +87,15 @@ Para reproduzir o artefato localmente sem usar Node ou npm no host:
 
 ```bash
 make build-pages
+# ou, para outro backend:
+make build-pages API_URL="https://api.exemplo.com"
 ```
+
+`API_URL` é pública e incorporada estaticamente no JavaScript durante o build;
+nunca use essa variável para segredos. Em desenvolvimento, sem `define`, o padrão
+é `http://localhost:3000`. No workflow de Pages ela pode ser configurada como
+repository/environment variable `API_URL`; se ausente, usa
+`https://api.otav.com.br`.
 
 O comando gera `dist/sistema-de-ocorrencias-web/browser`, incluindo `CNAME` e
 `404.html`. Esse último arquivo permite que o roteamento da SPA responda também
