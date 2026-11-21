@@ -3,7 +3,7 @@
 # `make` (ou `make help`) lista os alvos.
 .DEFAULT_GOAL := help
 .NOTPARALLEL:
-.PHONY: help up down logs reset seed install tdd refactor
+.PHONY: help up down logs reset seed install tdd refactor build-pages
 
 API_DIR ?= ../sistema-de-ocorrencias-api
 COMPOSE := docker compose -f $(API_DIR)/docker-compose.yml
@@ -33,3 +33,7 @@ tdd: ## Vitest (ng test) em modo watch, sem cobertura (ciclo Red/Green)
 
 refactor: ## Prettier + ESLint --fix (gts + angular-eslint) + Vitest com cobertura
 	$(web_exec) sh -c 'npm run format && npm run lint:fix && npm run test:cov'
+
+build-pages: ## Gera o artefato estático usado pelo GitHub Pages, dentro do Docker
+	$(web_exec) sh -c 'npm run build -- --base-href / --deploy-url / && cp dist/sistema-de-ocorrencias-web/browser/index.html dist/sistema-de-ocorrencias-web/browser/404.html'
+	@test -f dist/sistema-de-ocorrencias-web/browser/CNAME
