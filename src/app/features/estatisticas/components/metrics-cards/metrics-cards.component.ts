@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-metrics-cards',
@@ -7,9 +7,13 @@ import { CommonModule } from '@angular/common';
   template: `
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
       <!-- Card 1 -->
-      <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-between">
+      <div
+        class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-between"
+      >
         <div class="flex justify-between items-start mb-4">
-          <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Ocorrências registradas</span>
+          <span class="text-xs font-bold text-gray-500 uppercase tracking-wider"
+            >Ocorrências registradas</span
+          >
           <span class="w-3 h-3 rounded-full bg-slate-900 inline-block"></span>
         </div>
         <div>
@@ -19,9 +23,13 @@ import { CommonModule } from '@angular/common';
       </div>
 
       <!-- Card 2 -->
-      <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-between">
+      <div
+        class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-between"
+      >
         <div class="flex justify-between items-start mb-4">
-          <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Pendentes</span>
+          <span class="text-xs font-bold text-gray-500 uppercase tracking-wider"
+            >Pendentes</span
+          >
           <span class="w-3 h-3 rounded-full bg-amber-600 inline-block"></span>
         </div>
         <div>
@@ -31,9 +39,13 @@ import { CommonModule } from '@angular/common';
       </div>
 
       <!-- Card 3 -->
-      <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-between">
+      <div
+        class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-between"
+      >
         <div class="flex justify-between items-start mb-4">
-          <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Concluídas</span>
+          <span class="text-xs font-bold text-gray-500 uppercase tracking-wider"
+            >Concluídas</span
+          >
           <span class="w-3 h-3 rounded-full bg-emerald-700 inline-block"></span>
         </div>
         <div>
@@ -42,6 +54,6 @@ import { CommonModule } from '@angular/common';
         </div>
       </div>
     </div>
-  `
+  `,
 })
 export class MetricsCardsComponent {}
