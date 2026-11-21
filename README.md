@@ -74,6 +74,39 @@ Ele usa o Node da versão em `.nvmrc` e confere, nesta ordem:
 4. **Build de produção** (`npm run build`): falha se houver erro de tipo ou de template.
 5. **Testes unitários com cobertura** (`coverage/lcov.info`, que fica disponível como artefato `coverage` na página da execução por 7 dias).
 
+### Deploy no GitHub Pages
+
+O front-end é uma SPA Angular e pode ser servido como arquivos estáticos no GitHub
+Pages. A API continua hospedada separadamente.
+
+O workflow `.github/workflows/deploy-pages.yml` publica a branch `main` em
+<https://app.otav.com.br>. Antes da primeira publicação, configure **Settings →
+Pages → Build and deployment → Source: GitHub Actions** no repositório.
+
+Para reproduzir o artefato localmente sem usar Node ou npm no host:
+
+```bash
+make build-pages
+```
+
+O comando gera `dist/sistema-de-ocorrencias-web/browser`, incluindo `CNAME` e
+`404.html`. Esse último arquivo permite que o roteamento da SPA responda também
+quando uma rota for aberta ou atualizada diretamente.
+
+#### Cloudflare
+
+Crie ou atualize os seguintes DNS do domínio:
+
+| Tipo | Nome | Destino | Proxy |
+| --- | --- | --- | --- |
+| CNAME | `app` | `otaviano00.github.io` | DNS only, inicialmente |
+
+Mantenha o proxy desativado durante a primeira validação do domínio pelo GitHub.
+Depois que **Settings → Pages** mostrar o domínio validado e o HTTPS ativo, você
+pode testar a ativação do proxy (nuvem laranja) no Cloudflare. Se houver erro 404
+ou de certificado, volte temporariamente para **DNS only** e aguarde a verificação.
+Não crie um registro A para este subdomínio enquanto usar CNAME.
+
 ### Onde fica cada configuração
 
 | Ferramenta | Arquivo | Observação |

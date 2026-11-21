@@ -1,0 +1,57 @@
+name: Deploy para GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    env:
+      NG_CLI_ANALYTICS: 'false'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Configurar Pages
+        uses: actions/configure-pages@v5
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci --no-audit --no-fund
+
+      - name: Build de produção para Pages
+        run: npm run build -- --base-href / --deploy-url /
+
+      - name: Preparar fallback da SPA
+        run: cp dist/sistema-de-ocorrencias-web/browser/index.html dist/sistema-de-ocorrencias-web/browser/404.html
+
+      - name: Enviar artefato do Pages
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist/sistema-de-ocorrencias-web/browser
+
+      - name: Publicar no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
