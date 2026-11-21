@@ -17,6 +17,7 @@ import {CommonModule} from '@angular/common';
         <!-- Região -->
         <div class="flex flex-col gap-1.5 mb-4">
           <label
+            for="regiao"
             class="text-xs font-bold text-gray-700 uppercase tracking-wider"
             >Região</label
           >
@@ -32,6 +33,7 @@ import {CommonModule} from '@angular/common';
         <!-- Categoria -->
         <div class="flex flex-col gap-1.5 mb-4">
           <label
+            for="categoria"
             class="text-xs font-bold text-gray-700 uppercase tracking-wider"
             >Categoria</label
           >

@@ -17,7 +17,9 @@ import {CommonModule} from '@angular/common';
 
       <!-- Categoria -->
       <div class="flex flex-col gap-1.5">
-        <label class="text-xs font-bold text-gray-700 uppercase tracking-wider"
+        <label
+          for="categoria"
+          class="text-xs font-bold text-gray-700 uppercase tracking-wider"
           >Categoria *</label
         >
         <select
@@ -35,7 +37,9 @@ import {CommonModule} from '@angular/common';
 
       <!-- Título -->
       <div class="flex flex-col gap-1.5">
-        <label class="text-xs font-bold text-gray-700 uppercase tracking-wider"
+        <label
+          for="titulo"
+          class="text-xs font-bold text-gray-700 uppercase tracking-wider"
           >Título *</label
         >
         <input
@@ -47,7 +51,9 @@ import {CommonModule} from '@angular/common';
 
       <!-- Descrição -->
       <div class="flex flex-col gap-1.5">
-        <label class="text-xs font-bold text-gray-700 uppercase tracking-wider"
+        <label
+          for="descricao"
+          class="text-xs font-bold text-gray-700 uppercase tracking-wider"
           >Descrição *</label
         >
         <textarea
@@ -64,6 +70,7 @@ A calçada está danificada próximo à faixa de pedestres da SQN 208. O buraco 
       <div class="flex flex-col gap-1.5">
         <div class="flex justify-between items-center">
           <label
+            for="fotografia"
             class="text-xs font-bold text-gray-700 uppercase tracking-wider"
             >Fotografia</label
           >
