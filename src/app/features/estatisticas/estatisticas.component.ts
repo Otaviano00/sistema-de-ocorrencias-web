@@ -1,7 +1,7 @@
 // src/app/features/estatisticas/estatisticas.component.ts
 import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {SidebarComponent} from '../mapa/components/sidebar/sidebar.component';
+import {SidebarComponent} from '../../shared/components/sidebar/sidebar.component';
 import {FiltersBarComponent} from './components/filters-bar/filters-bar.component';
 import {MetricsCardsComponent} from './components/metrics-cards/metrics-cards.component';
 import {EvolutionChartComponent} from './components/evolution-chart/evolution-chart.component';

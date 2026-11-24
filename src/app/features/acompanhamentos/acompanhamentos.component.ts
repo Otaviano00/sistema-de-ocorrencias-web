@@ -1,7 +1,7 @@
 // src/app/features/acompanhamentos/acompanhamentos.component.ts
 import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {SidebarComponent} from '../mapa/components/sidebar/sidebar.component';
+import {SidebarComponent} from '../../shared/components/sidebar/sidebar.component';
 import {TabsHeaderComponent} from './components/tabs-header/tabs-header.component';
 import {AcompanhadasListComponent} from './components/acompanhadas-list/acompanhadas-list.component';
 import {NovoMonitoramentoCardComponent} from './components/novo-monitoramento-card/novo-monitoramento-card.component';
