@@ -1,71 +1,69 @@
-import {Component} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { Component, output, signal } from '@angular/core';
+
+interface MapPin {
+  id: string;
+  label: string;
+  status: 'Pendente' | 'Concluída';
+  xPercent: number;
+  yPercent: number;
+}
 
 @Component({
   selector: 'app-map-view',
-  imports: [CommonModule],
   template: `
-    <div class="flex flex-col h-full gap-6">
-      <!-- Título e Botão de Ação -->
-      <div class="flex justify-between items-center shrink-0">
+    <div class="bg-white border border-gray-200 rounded-2xl p-5 h-full flex flex-col justify-between">
+      <div class="flex items-center justify-between mb-4">
         <div>
-          <span
-            class="text-xs font-semibold text-emerald-700 uppercase tracking-wider"
-            >Explore sua cidade</span
+          <span class="text-[11px] font-bold text-emerald-800 uppercase tracking-wider block">
+            Mapa interativo
+          </span>
+          <h2 class="text-base font-bold text-slate-900">
+            Ocorrências em Brasília, DF
+          </h2>
+        </div>
+        <span class="text-xs text-gray-500">
+          Clique em um marcador para inspecionar
+        </span>
+      </div>
+
+      <div class="relative flex-1 min-h-[340px] rounded-xl bg-[#e9efe9] border border-emerald-900/10 overflow-hidden p-4">
+        @for (pin of pins(); track pin.id) {
+          <button
+            type="button"
+            (click)="onSelectPin(pin.id)"
+            [style.left.%]="pin.xPercent"
+            [style.top.%]="pin.yPercent"
+            class="absolute -translate-x-1/2 -translate-y-1/2 bg-white hover:bg-emerald-50 border border-gray-200 rounded-xl px-3 py-2 shadow-sm transition text-left cursor-pointer"
           >
-          <h1 class="text-2xl font-bold text-slate-900">
-            Cada ponto, uma melhoria possível.
-          </h1>
-        </div>
-        <button
-          class="bg-emerald-700 hover:bg-emerald-800 text-white font-medium px-4 py-2.5 rounded-lg flex items-center gap-2 shadow-sm transition"
-        >
-          + Registrar ocorrência
-        </button>
-      </div>
-
-      <!-- Barra de Filtros -->
-      <div
-        class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex gap-4 items-center shrink-0"
-      >
-        <input
-          type="text"
-          placeholder="Buscar região ou ocorrência"
-          class="flex-1 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600"
-        />
-        <select
-          class="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600"
-        >
-          <option>Todas as categorias</option>
-        </select>
-        <select
-          class="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600"
-        >
-          <option>Todos os status</option>
-        </select>
-        <select
-          class="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600"
-        >
-          <option>Brasília, DF</option>
-        </select>
-      </div>
-
-      <!-- Caixa do Mapa Interativo -->
-      <div
-        class="flex-1 bg-emerald-50/20 rounded-xl border border-gray-200 shadow-sm relative overflow-hidden flex items-center justify-center min-h-[450px]"
-      >
-        <div class="text-center p-6">
-          <span class="text-5xl mb-3 block">🗺️</span>
-          <p class="font-bold text-slate-700 text-lg">
-            Área do Mapa Interativo
-          </p>
-          <p class="text-xs text-gray-500 max-w-sm mt-1">
-            Integração pronta para exibir os marcadores em cima do espaço
-            expandido.
-          </p>
-        </div>
+            <p class="text-xs font-bold text-slate-900 whitespace-nowrap">{{ pin.label }}</p>
+            <p class="text-[11px] text-gray-500 mt-0.5">#{{ pin.id }} · {{ pin.status }}</p>
+          </button>
+        }
       </div>
     </div>
-  `,
+  `
 })
-export class MapViewComponent {}
+export class MapViewComponent {
+  occurrenceSelected = output<string>();
+
+  pins = signal<MapPin[]>([
+    {
+      id: '0248',
+      label: 'Buraco na calçada',
+      status: 'Pendente',
+      xPercent: 32,
+      yPercent: 38
+    },
+    {
+      id: '0246',
+      label: 'Poste sem iluminação',
+      status: 'Pendente',
+      xPercent: 66,
+      yPercent: 58
+    }
+  ]);
+
+  onSelectPin(id: string) {
+    this.occurrenceSelected.emit(id);
+  }
+}

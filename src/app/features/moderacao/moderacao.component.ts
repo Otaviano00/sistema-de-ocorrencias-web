@@ -1,7 +1,7 @@
 // src/app/features/moderacao/moderacao.component.ts
 import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {SidebarComponent} from '../mapa/components/sidebar/sidebar.component';
+import {SidebarComponent} from '../../shared/components/sidebar/sidebar.component';
 import {ModerationMetricsComponent} from './components/moderation-metrics/moderation-metrics.component';
 import {PendingTableComponent} from './components/pending-table/pending-table.component';
 import {ModerationDetailComponent} from './components/moderation-detail/moderation-detail.component';

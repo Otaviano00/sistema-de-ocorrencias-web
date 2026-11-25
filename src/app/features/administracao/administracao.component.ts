@@ -1,7 +1,7 @@
 // src/app/features/administracao/administracao.component.ts
 import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {SidebarComponent} from '../mapa/components/sidebar/sidebar.component';
+import {SidebarComponent} from '../../shared/components/sidebar/sidebar.component';
 import {AdminHeaderComponent} from './components/admin-header/admin-header.component';
 import {CategoriasManagerComponent} from './components/categorias-manager/categorias-manager.component';
 import {RegioesManagerComponent} from './components/regioes-manager/regioes-manager.component';
