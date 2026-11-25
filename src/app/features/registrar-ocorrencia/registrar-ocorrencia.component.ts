@@ -485,15 +485,15 @@ export class RegistrarOcorrenciaPageComponent implements OnInit, OnDestroy {
 
     console.log('Ocorrência confirmada:', payload);
     this.showConfirmModal.set(false);
-    this.router.navigate(['/acompanhamentos']);
+    void this.router.navigate(['/acompanhamentos']);
   }
 
   goToMap() {
-    this.router.navigate(['/mapa']);
+    void this.router.navigate(['/mapa']);
   }
 
   navigateTo(route: string) {
-    this.router.navigate([route]);
+    void this.router.navigate([route]);
   }
 
   private revokeCurrentPhotoUrl() {

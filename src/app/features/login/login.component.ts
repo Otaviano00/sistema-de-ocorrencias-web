@@ -45,14 +45,14 @@ export class LoginPageComponent {
 
   handleLogin(credentials: LoginCredentials) {
     console.log('Tentativa de login:', credentials);
-    this.router.navigate(['/mapa']);
+    void this.router.navigate(['/mapa']);
   }
 
   goToRegister() {
-    this.router.navigate(['/cadastro']);
+    void this.router.navigate(['/cadastro']);
   }
 
   goToMap() {
-    this.router.navigate(['/mapa']);
+    void this.router.navigate(['/mapa']);
   }
 }

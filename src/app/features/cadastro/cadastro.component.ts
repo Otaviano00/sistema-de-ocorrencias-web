@@ -47,15 +47,15 @@ export class CadastroPageComponent {
 
   handleRegister(payload: RegisterPayload) {
     console.log('Dados de cadastro enviados:', payload);
-    this.router.navigate(['/mapa']);
+    void this.router.navigate(['/mapa']);
   }
 
   goToLogin() {
-    this.router.navigate(['/login']);
+    void this.router.navigate(['/login']);
   }
 
   goToMap() {
-    this.router.navigate(['/mapa']);
+    void this.router.navigate(['/mapa']);
   }
 
   openTerms() {
