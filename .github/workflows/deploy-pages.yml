@@ -24,6 +24,7 @@ jobs:
 
     env:
       NG_CLI_ANALYTICS: 'false'
+      API_URL: ${{ vars.API_URL || 'https://api.otav.com.br' }}
 
     steps:
       - name: Checkout
@@ -42,7 +43,7 @@ jobs:
         run: npm ci --no-audit --no-fund
 
       - name: Build de produção para Pages
-        run: npm run build -- --base-href / --deploy-url /
+        run: npm run build -- --base-href / --deploy-url / --define "API_URL_BUILD='${API_URL}'"
 
       - name: Preparar fallback da SPA
         run: cp dist/sistema-de-ocorrencias-web/browser/index.html dist/sistema-de-ocorrencias-web/browser/404.html

@@ -1,13 +1,13 @@
-import { Routes } from '@angular/router';
-import { MapaPageComponent } from './mapa.component';
+import {Routes} from '@angular/router';
+import {MapaPageComponent} from './mapa.component';
 
 export const MAPA_ROUTES: Routes = [
   {
     path: '',
-    component: MapaPageComponent
+    component: MapaPageComponent,
   },
   {
     path: ':ocorrenciaId',
-    component: MapaPageComponent
-  }
+    component: MapaPageComponent,
+  },
 ];

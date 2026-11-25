@@ -16,7 +16,7 @@ export HOST_GID := $(shell id -g)
 TTY := $(shell [ -t 0 ] || echo -T)
 
 # Roda no container 'web' em execução; se parado, num container efêmero isolado.
-web_exec = $(if $(shell $(COMPOSE) ps -q --status running web 2>/dev/null),$(COMPOSE) exec $(TTY) web,$(COMPOSE) run --rm --no-deps $(TTY) web)
+web_exec = $(if $(shell $(COMPOSE) ps -q --status running web 2>/dev/null),$(COMPOSE) exec $(if $(API_URL),-e API_URL=$(API_URL)) $(TTY) web,$(COMPOSE) run --rm --no-deps $(if $(API_URL),-e API_URL=$(API_URL)) $(TTY) web)
 
 help: ## Lista os alvos disponíveis
 	@grep -E '^[a-z -]+:.*## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*## "}; {printf "  \033[36m%-9s\033[0m %s\n", $$1, $$2}'
@@ -34,6 +34,6 @@ tdd: ## Vitest (ng test) em modo watch, sem cobertura (ciclo Red/Green)
 refactor: ## Prettier + ESLint --fix (gts + angular-eslint) + Vitest com cobertura
 	$(web_exec) sh -c 'npm run format && npm run lint:fix && npm run test:cov'
 
-build-pages: ## Gera o artefato estático usado pelo GitHub Pages, dentro do Docker
-	$(web_exec) sh -c 'npm run build -- --base-href / --deploy-url / && cp dist/sistema-de-ocorrencias-web/browser/index.html dist/sistema-de-ocorrencias-web/browser/404.html'
+build-pages: ## Gera o artefato do GitHub Pages (API_URL padrão: https://api.otav.com.br)
+	$(web_exec) sh -c 'npm run build -- --base-href / --deploy-url / --define "API_URL_BUILD='"'"'$${API_URL:-https://api.otav.com.br}'"'"'" && cp dist/sistema-de-ocorrencias-web/browser/index.html dist/sistema-de-ocorrencias-web/browser/404.html'
 	@test -f dist/sistema-de-ocorrencias-web/browser/CNAME

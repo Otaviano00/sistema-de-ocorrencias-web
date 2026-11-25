@@ -1,4 +1,4 @@
-import { Component, output, signal } from '@angular/core';
+import {Component, output, signal} from '@angular/core';
 
 export interface LoginCredentials {
   email: string;
@@ -10,7 +10,9 @@ export interface LoginCredentials {
   selector: 'app-login-form',
   template: `
     <div class="w-full max-w-md mx-auto">
-      <span class="text-xs font-bold text-emerald-800 uppercase tracking-wider block mb-2">
+      <span
+        class="text-xs font-bold text-emerald-800 uppercase tracking-wider block mb-2"
+      >
         Bem-vindo ao Zelar
       </span>
       <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight mb-2">
@@ -55,7 +57,9 @@ export interface LoginCredentials {
             <button
               type="button"
               (click)="togglePasswordVisibility()"
-              [attr.aria-label]="showPassword() ? 'Ocultar senha' : 'Mostrar senha'"
+              [attr.aria-label]="
+                showPassword() ? 'Ocultar senha' : 'Mostrar senha'
+              "
               class="absolute right-3 text-gray-400 hover:text-gray-700 text-sm focus:outline-none"
             >
               @if (showPassword()) {
@@ -68,7 +72,9 @@ export interface LoginCredentials {
         </div>
 
         <!-- Manter conectada -->
-        <label class="flex items-center gap-2.5 text-xs text-gray-600 cursor-pointer select-none pt-0.5">
+        <label
+          class="flex items-center gap-2.5 text-xs text-gray-600 cursor-pointer select-none pt-0.5"
+        >
           <input
             type="checkbox"
             [checked]="rememberMe()"
@@ -116,7 +122,7 @@ export interface LoginCredentials {
         Consultar mapa sem entrar
       </button>
     </div>
-  `
+  `,
 })
 export class LoginFormComponent {
   email = signal('');
@@ -137,7 +143,7 @@ export class LoginFormComponent {
     this.loginSubmit.emit({
       email: this.email(),
       password: this.password(),
-      rememberMe: this.rememberMe()
+      rememberMe: this.rememberMe(),
     });
   }
 
