@@ -1,16 +1,18 @@
-import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { BrandPanelComponent } from '../../shared/components/brand-panel/brand-panel.component';
+import {Component, inject} from '@angular/core';
+import {Router} from '@angular/router';
+import {BrandPanelComponent} from '../../shared/components/brand-panel/brand-panel.component';
 import {
   LoginFormComponent,
-  LoginCredentials
+  LoginCredentials,
 } from './components/login-form/login-form.component';
 
 @Component({
   selector: 'app-login-page',
   imports: [BrandPanelComponent, LoginFormComponent],
   template: `
-    <div class="min-h-screen bg-[#f9fbf9] text-slate-800 flex flex-col lg:flex-row">
+    <div
+      class="min-h-screen bg-[#f9fbf9] text-slate-800 flex flex-col lg:flex-row"
+    >
       <app-brand-panel />
 
       <div class="flex-1 flex flex-col justify-between p-6 sm:p-8 lg:p-10">
@@ -36,7 +38,7 @@ import {
         <div class="hidden lg:block h-4"></div>
       </div>
     </div>
-  `
+  `,
 })
 export class LoginPageComponent {
   private router = inject(Router);

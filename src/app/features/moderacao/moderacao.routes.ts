@@ -1,13 +1,13 @@
-import { Routes } from '@angular/router';
-import { ModeracaoPageComponent } from './moderacao.component';
+import {Routes} from '@angular/router';
+import {ModeracaoPageComponent} from './moderacao.component';
 
 export const MODERACAO_ROUTES: Routes = [
   {
     path: '',
-    component: ModeracaoPageComponent
+    component: ModeracaoPageComponent,
   },
   {
     path: ':ocorrenciaId',
-    component: ModeracaoPageComponent
-  }
+    component: ModeracaoPageComponent,
+  },
 ];

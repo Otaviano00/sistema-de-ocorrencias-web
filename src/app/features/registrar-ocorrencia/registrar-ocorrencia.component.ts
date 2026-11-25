@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
-import { Router } from '@angular/router';
-import { SidebarComponent } from '../../shared/components/sidebar/sidebar.component';
+import {Component, OnDestroy, OnInit, inject, signal} from '@angular/core';
+import {Router} from '@angular/router';
+import {SidebarComponent} from '../../shared/components/sidebar/sidebar.component';
 
 export interface CurrentLocationInfo {
   label: string;
@@ -30,9 +30,13 @@ export interface OccurrenceDraft {
 
       <div class="flex-1 flex flex-col min-w-0">
         <!-- Topbar -->
-        <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 lg:px-8 shrink-0">
+        <header
+          class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 lg:px-8 shrink-0"
+        >
           <div class="flex items-center gap-3 text-sm text-gray-600 min-w-0">
-            <span class="flex items-center gap-1.5 font-semibold text-slate-900 whitespace-nowrap">
+            <span
+              class="flex items-center gap-1.5 font-semibold text-slate-900 whitespace-nowrap"
+            >
               <span aria-hidden="true">📍</span>
               <span>{{ location().label }}</span>
             </span>
@@ -61,16 +65,23 @@ export interface OccurrenceDraft {
         <!-- Conteúdo Principal -->
         <main class="flex-1 p-6 lg:p-8 overflow-y-auto">
           <div class="max-w-3xl mx-auto">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div
+              class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6"
+            >
               <div>
-                <span class="text-[11px] font-bold text-emerald-800 uppercase tracking-wider block mb-1">
+                <span
+                  class="text-[11px] font-bold text-emerald-800 uppercase tracking-wider block mb-1"
+                >
                   Participação cidadã
                 </span>
-                <h1 class="text-2xl lg:text-3xl font-extrabold text-slate-900 tracking-tight">
+                <h1
+                  class="text-2xl lg:text-3xl font-extrabold text-slate-900 tracking-tight"
+                >
                   Registrar ocorrência
                 </h1>
                 <p class="text-xs sm:text-sm text-gray-500 mt-1">
-                  A ocorrência será vinculada automaticamente à sua localização atual.
+                  A ocorrência será vinculada automaticamente à sua localização
+                  atual.
                 </p>
               </div>
 
@@ -84,7 +95,9 @@ export interface OccurrenceDraft {
             </div>
 
             <!-- Banner da Localização Atual -->
-            <div class="bg-emerald-50/70 border border-emerald-200/80 rounded-2xl p-4 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div
+              class="bg-emerald-50/70 border border-emerald-200/80 rounded-2xl p-4 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+            >
               <div class="flex items-start gap-3">
                 <span class="text-base mt-0.5" aria-hidden="true">📍</span>
                 <div>
@@ -112,7 +125,10 @@ export interface OccurrenceDraft {
               class="bg-white border border-gray-200 rounded-2xl p-6 shadow-2xs space-y-5"
             >
               <div class="flex flex-col gap-1.5">
-                <label for="occ-titulo" class="text-xs font-bold text-slate-800">
+                <label
+                  for="occ-titulo"
+                  class="text-xs font-bold text-slate-800"
+                >
                   Título da ocorrência
                 </label>
                 <input
@@ -127,7 +143,10 @@ export interface OccurrenceDraft {
               </div>
 
               <div class="flex flex-col gap-1.5">
-                <label for="occ-categoria" class="text-xs font-bold text-slate-800">
+                <label
+                  for="occ-categoria"
+                  class="text-xs font-bold text-slate-800"
+                >
                   Categoria
                 </label>
                 <select
@@ -139,12 +158,17 @@ export interface OccurrenceDraft {
                   <option value="Calçadas e vias">Calçadas e vias</option>
                   <option value="Iluminação pública">Iluminação pública</option>
                   <option value="Coleta e limpeza">Coleta e limpeza</option>
-                  <option value="Áreas verdes e praças">Áreas verdes e praças</option>
+                  <option value="Áreas verdes e praças">
+                    Áreas verdes e praças
+                  </option>
                 </select>
               </div>
 
               <div class="flex flex-col gap-1.5">
-                <label for="occ-descricao" class="text-xs font-bold text-slate-800">
+                <label
+                  for="occ-descricao"
+                  class="text-xs font-bold text-slate-800"
+                >
                   Descrição
                 </label>
                 <textarea
@@ -161,7 +185,10 @@ export interface OccurrenceDraft {
               <!-- Foto (Opcional) -->
               <div class="flex flex-col gap-2">
                 <div class="flex items-center justify-between">
-                  <label for="occ-foto" class="text-xs font-bold text-slate-800">
+                  <label
+                    for="occ-foto"
+                    class="text-xs font-bold text-slate-800"
+                  >
                     Foto da ocorrência
                   </label>
                   <span class="text-[11px] text-gray-400">Opcional</span>
@@ -188,7 +215,9 @@ export interface OccurrenceDraft {
                 </label>
 
                 @if (photo(); as currentPhoto) {
-                  <div class="bg-gray-50 border border-gray-200 rounded-xl p-3 flex items-center justify-between gap-3">
+                  <div
+                    class="bg-gray-50 border border-gray-200 rounded-xl p-3 flex items-center justify-between gap-3"
+                  >
                     <div class="flex items-center gap-3 min-w-0">
                       <img
                         [src]="currentPhoto.previewUrl"
@@ -196,7 +225,9 @@ export interface OccurrenceDraft {
                         class="w-12 h-12 rounded-lg object-cover border border-gray-200 shrink-0"
                       />
                       <div class="min-w-0">
-                        <p class="text-xs font-semibold text-slate-900 truncate">
+                        <p
+                          class="text-xs font-semibold text-slate-900 truncate"
+                        >
                           {{ currentPhoto.fileName }}
                         </p>
                         <p class="text-[11px] text-emerald-700">Foto anexada</p>
@@ -244,43 +275,72 @@ export interface OccurrenceDraft {
         aria-modal="true"
         aria-labelledby="confirm-modal-title"
       >
-        <div class="bg-white border border-gray-200 rounded-2xl max-w-lg w-full p-6 shadow-xl space-y-5 max-h-[90vh] overflow-y-auto">
+        <div
+          class="bg-white border border-gray-200 rounded-2xl max-w-lg w-full p-6 shadow-xl space-y-5 max-h-[90vh] overflow-y-auto"
+        >
           <div>
-            <span class="text-[11px] font-bold text-emerald-800 uppercase tracking-wider block mb-1">
+            <span
+              class="text-[11px] font-bold text-emerald-800 uppercase tracking-wider block mb-1"
+            >
               Revisão do registro
             </span>
-            <h2 id="confirm-modal-title" class="text-xl font-extrabold text-slate-900">
+            <h2
+              id="confirm-modal-title"
+              class="text-xl font-extrabold text-slate-900"
+            >
               Revise e confirme sua ocorrência
             </h2>
             <p class="text-xs text-gray-500 mt-1">
-              Confira os dados abaixo antes de confirmar o pedido de registro na sua localização atual.
+              Confira os dados abaixo antes de confirmar o pedido de registro na
+              sua localização atual.
             </p>
           </div>
 
-          <div class="bg-gray-50 border border-gray-200/80 rounded-xl p-4 space-y-3 text-sm">
+          <div
+            class="bg-gray-50 border border-gray-200/80 rounded-xl p-4 space-y-3 text-sm"
+          >
             <div>
-              <span class="text-[11px] font-semibold text-gray-400 uppercase block">Título</span>
+              <span
+                class="text-[11px] font-semibold text-gray-400 uppercase block"
+                >Título</span
+              >
               <p class="font-semibold text-slate-900">{{ titulo() }}</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <span class="text-[11px] font-semibold text-gray-400 uppercase block">Categoria</span>
+                <span
+                  class="text-[11px] font-semibold text-gray-400 uppercase block"
+                  >Categoria</span
+                >
                 <p class="font-medium text-slate-800">{{ categoria() }}</p>
               </div>
               <div>
-                <span class="text-[11px] font-semibold text-gray-400 uppercase block">Localização atual</span>
+                <span
+                  class="text-[11px] font-semibold text-gray-400 uppercase block"
+                  >Localização atual</span
+                >
                 <p class="font-medium text-slate-800">{{ location().label }}</p>
               </div>
             </div>
 
             <div>
-              <span class="text-[11px] font-semibold text-gray-400 uppercase block">Descrição</span>
-              <p class="text-gray-700 text-xs leading-relaxed whitespace-pre-line">{{ descricao() }}</p>
+              <span
+                class="text-[11px] font-semibold text-gray-400 uppercase block"
+                >Descrição</span
+              >
+              <p
+                class="text-gray-700 text-xs leading-relaxed whitespace-pre-line"
+              >
+                {{ descricao() }}
+              </p>
             </div>
 
             <div>
-              <span class="text-[11px] font-semibold text-gray-400 uppercase block mb-1">Foto</span>
+              <span
+                class="text-[11px] font-semibold text-gray-400 uppercase block mb-1"
+                >Foto</span
+              >
               @if (photo(); as currentPhoto) {
                 <div class="flex items-center gap-3">
                   <img
@@ -293,7 +353,9 @@ export interface OccurrenceDraft {
                   </span>
                 </div>
               } @else {
-                <p class="text-xs text-gray-500">Nenhuma foto anexada (opcional).</p>
+                <p class="text-xs text-gray-500">
+                  Nenhuma foto anexada (opcional).
+                </p>
               }
             </div>
           </div>
@@ -318,7 +380,7 @@ export interface OccurrenceDraft {
         </div>
       </div>
     }
-  `
+  `,
 })
 export class RegistrarOcorrenciaPageComponent implements OnInit, OnDestroy {
   private router = inject(Router);
@@ -332,7 +394,7 @@ export class RegistrarOcorrenciaPageComponent implements OnInit, OnDestroy {
   location = signal<CurrentLocationInfo>({
     label: 'Brasília, DF',
     coordsText: 'Obtendo localização atual...',
-    status: 'loading'
+    status: 'loading',
   });
 
   ngOnInit() {
@@ -347,14 +409,14 @@ export class RegistrarOcorrenciaPageComponent implements OnInit, OnDestroy {
     this.location.set({
       label: 'Brasília, DF',
       coordsText: 'Capturando localização atual...',
-      status: 'loading'
+      status: 'loading',
     });
 
     if (typeof navigator === 'undefined' || !navigator.geolocation) {
       this.location.set({
         label: 'Brasília, DF',
         coordsText: 'Localização padrão (Brasília, DF)',
-        status: 'fallback'
+        status: 'fallback',
       });
       return;
     }
@@ -366,17 +428,18 @@ export class RegistrarOcorrenciaPageComponent implements OnInit, OnDestroy {
         this.location.set({
           label: 'Localização atual (Brasília, DF)',
           coordsText: `Lat ${lat}, Lng ${lng}`,
-          status: 'located'
+          status: 'located',
         });
       },
       () => {
         this.location.set({
           label: 'Brasília, DF',
-          coordsText: 'Permissão não concedida · Usando localização padrão (Brasília, DF)',
-          status: 'fallback'
+          coordsText:
+            'Permissão não concedida · Usando localização padrão (Brasília, DF)',
+          status: 'fallback',
         });
       },
-      { enableHighAccuracy: true, timeout: 8000 }
+      {enableHighAccuracy: true, timeout: 8000},
     );
   }
 
@@ -391,7 +454,7 @@ export class RegistrarOcorrenciaPageComponent implements OnInit, OnDestroy {
     const previewUrl = URL.createObjectURL(file);
     this.photo.set({
       fileName: file.name,
-      previewUrl
+      previewUrl,
     });
 
     inputEl.value = '';
@@ -417,7 +480,7 @@ export class RegistrarOcorrenciaPageComponent implements OnInit, OnDestroy {
       categoria: this.categoria(),
       descricao: this.descricao(),
       localizacao: `${this.location().label} (${this.location().coordsText})`,
-      photoName: this.photo()?.fileName
+      photoName: this.photo()?.fileName,
     };
 
     console.log('Ocorrência confirmada:', payload);

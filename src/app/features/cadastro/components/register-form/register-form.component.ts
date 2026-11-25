@@ -1,4 +1,4 @@
-import { Component, computed, output, signal } from '@angular/core';
+import {Component, computed, output, signal} from '@angular/core';
 
 export interface RegisterPayload {
   fullName: string;
@@ -11,14 +11,17 @@ export interface RegisterPayload {
   selector: 'app-register-form',
   template: `
     <div class="w-full max-w-md mx-auto">
-      <span class="text-xs font-bold text-emerald-800 uppercase tracking-wider block mb-2">
+      <span
+        class="text-xs font-bold text-emerald-800 uppercase tracking-wider block mb-2"
+      >
         Faça parte da mudança
       </span>
       <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight mb-2">
         Crie sua conta.
       </h2>
       <p class="text-sm text-gray-500 mb-7">
-        Um só lugar para registrar problemas e acompanhar melhorias na sua região.
+        Um só lugar para registrar problemas e acompanhar melhorias na sua
+        região.
       </p>
 
       <form (submit)="onSubmit($event)" class="space-y-4">
@@ -56,7 +59,10 @@ export interface RegisterPayload {
 
         <!-- Senha -->
         <div class="flex flex-col gap-1.5">
-          <label for="register-password" class="text-xs font-bold text-slate-800">
+          <label
+            for="register-password"
+            class="text-xs font-bold text-slate-800"
+          >
             Senha
           </label>
           <div class="relative flex items-center">
@@ -73,7 +79,9 @@ export interface RegisterPayload {
             <button
               type="button"
               (click)="togglePasswordVisibility()"
-              [attr.aria-label]="showPassword() ? 'Ocultar senha' : 'Mostrar senha'"
+              [attr.aria-label]="
+                showPassword() ? 'Ocultar senha' : 'Mostrar senha'
+              "
               class="absolute right-3 text-gray-400 hover:text-gray-700 text-sm focus:outline-none cursor-pointer"
             >
               @if (showPassword()) {
@@ -90,7 +98,10 @@ export interface RegisterPayload {
 
         <!-- Confirmar senha -->
         <div class="flex flex-col gap-1.5">
-          <label for="register-confirm-password" class="text-xs font-bold text-slate-800">
+          <label
+            for="register-confirm-password"
+            class="text-xs font-bold text-slate-800"
+          >
             Confirmar senha
           </label>
           <div class="relative flex items-center">
@@ -107,7 +118,11 @@ export interface RegisterPayload {
             <button
               type="button"
               (click)="toggleConfirmPasswordVisibility()"
-              [attr.aria-label]="showConfirmPassword() ? 'Ocultar confirmação de senha' : 'Mostrar confirmação de senha'"
+              [attr.aria-label]="
+                showConfirmPassword()
+                  ? 'Ocultar confirmação de senha'
+                  : 'Mostrar confirmação de senha'
+              "
               class="absolute right-3 text-gray-400 hover:text-gray-700 text-sm focus:outline-none cursor-pointer"
             >
               @if (showConfirmPassword()) {
@@ -125,7 +140,9 @@ export interface RegisterPayload {
         </div>
 
         <!-- Aceite de termos -->
-        <label class="flex items-start gap-2.5 text-xs text-gray-600 cursor-pointer select-none pt-1">
+        <label
+          class="flex items-start gap-2.5 text-xs text-gray-600 cursor-pointer select-none pt-1"
+        >
           <input
             type="checkbox"
             [checked]="acceptedTerms()"
@@ -187,7 +204,7 @@ export interface RegisterPayload {
         </button>
       </p>
     </div>
-  `
+  `,
 })
 export class RegisterFormComponent {
   fullName = signal('');
@@ -228,7 +245,7 @@ export class RegisterFormComponent {
       fullName: this.fullName(),
       email: this.email(),
       password: this.password(),
-      acceptedTerms: this.acceptedTerms()
+      acceptedTerms: this.acceptedTerms(),
     });
   }
 

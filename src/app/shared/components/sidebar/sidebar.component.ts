@@ -1,4 +1,4 @@
-import { Component, input, output, signal } from '@angular/core';
+import {Component, input, output, signal} from '@angular/core';
 
 export type NavItemId =
   | 'mapa'
@@ -18,20 +18,32 @@ interface NavItem {
 @Component({
   selector: 'app-sidebar',
   template: `
-    <aside class="w-64 bg-white border-r border-gray-200 flex flex-col justify-between p-4 shrink-0 h-full">
+    <aside
+      class="w-64 bg-white border-r border-gray-200 flex flex-col justify-between p-4 shrink-0 h-full"
+    >
       <div>
         <div class="flex items-center gap-2.5 mb-8 px-2">
-          <div class="bg-emerald-700 text-white w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm">
+          <div
+            class="bg-emerald-700 text-white w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm"
+          >
             Z
           </div>
           <div>
-            <span class="text-xl font-bold tracking-tight text-slate-900 block leading-none">zelar</span>
-            <span class="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Cidade em comum</span>
+            <span
+              class="text-xl font-bold tracking-tight text-slate-900 block leading-none"
+              >zelar</span
+            >
+            <span
+              class="text-[10px] font-semibold text-gray-400 uppercase tracking-wider"
+              >Cidade em comum</span
+            >
           </div>
         </div>
 
         <div class="mb-6">
-          <p class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-2 px-2">
+          <p
+            class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-2 px-2"
+          >
             Principal
           </p>
           <nav aria-label="Menu principal" class="space-y-1">
@@ -55,7 +67,9 @@ interface NavItem {
         </div>
 
         <div>
-          <p class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-2 px-2">
+          <p
+            class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-2 px-2"
+          >
             Gestão
           </p>
           <nav aria-label="Menu de gestão" class="space-y-1">
@@ -80,27 +94,49 @@ interface NavItem {
       </div>
 
       <div class="bg-emerald-50/70 p-4 rounded-xl border border-emerald-100">
-        <p class="text-xs font-bold text-emerald-950 mb-1">Uma cidade melhor começa com você.</p>
+        <p class="text-xs font-bold text-emerald-950 mb-1">
+          Uma cidade melhor começa com você.
+        </p>
         <p class="text-[11px] text-emerald-800 leading-relaxed">
           Registre. Acompanhe. Faça parte da mudança.
         </p>
       </div>
     </aside>
-  `
+  `,
 })
 export class SidebarComponent {
   activeItem = input<NavItemId>('mapa');
   navigate = output<string>();
 
   principalItems = signal<NavItem[]>([
-    { id: 'mapa', label: 'Mapa de ocorrências', icon: '🗺️', route: '/mapa' },
-    { id: 'registrar', label: 'Registrar ocorrência', icon: '➕', route: '/registrar-ocorrencia' },
-    { id: 'acompanhamentos', label: 'Acompanhamentos', icon: '🔔', route: '/acompanhamentos' },
-    { id: 'estatisticas', label: 'Estatísticas', icon: '📊', route: '/estatisticas' }
+    {id: 'mapa', label: 'Mapa de ocorrências', icon: '🗺️', route: '/mapa'},
+    {
+      id: 'registrar',
+      label: 'Registrar ocorrência',
+      icon: '➕',
+      route: '/registrar-ocorrencia',
+    },
+    {
+      id: 'acompanhamentos',
+      label: 'Acompanhamentos',
+      icon: '🔔',
+      route: '/acompanhamentos',
+    },
+    {
+      id: 'estatisticas',
+      label: 'Estatísticas',
+      icon: '📊',
+      route: '/estatisticas',
+    },
   ]);
 
   gestaoItems = signal<NavItem[]>([
-    { id: 'moderacao', label: 'Moderação', icon: '🛡️', route: '/moderacao' },
-    { id: 'administracao', label: 'Administração', icon: '⚙️', route: '/administracao' }
+    {id: 'moderacao', label: 'Moderação', icon: '🛡️', route: '/moderacao'},
+    {
+      id: 'administracao',
+      label: 'Administração',
+      icon: '⚙️',
+      route: '/administracao',
+    },
   ]);
 }

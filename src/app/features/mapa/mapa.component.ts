@@ -1,9 +1,16 @@
-import { Component, computed, inject, input, linkedSignal, signal } from '@angular/core';
-import { Router } from '@angular/router';
-import { SidebarComponent } from '../../shared/components/sidebar/sidebar.component';
-import { HeaderComponent } from './components/header/header.component';
-import { MapViewComponent } from './components/map-view/map-view.component';
-import { OccurrenceDetailComponent } from './components/occurrence-detail/occurrence-detail.component';
+import {
+  Component,
+  computed,
+  inject,
+  input,
+  linkedSignal,
+  signal,
+} from '@angular/core';
+import {Router} from '@angular/router';
+import {SidebarComponent} from '../../shared/components/sidebar/sidebar.component';
+import {HeaderComponent} from './components/header/header.component';
+import {MapViewComponent} from './components/map-view/map-view.component';
+import {OccurrenceDetailComponent} from './components/occurrence-detail/occurrence-detail.component';
 
 export interface OccurrenceItem {
   id: string;
@@ -20,7 +27,7 @@ export interface OccurrenceItem {
     SidebarComponent,
     HeaderComponent,
     MapViewComponent,
-    OccurrenceDetailComponent
+    OccurrenceDetailComponent,
   ],
   template: `
     <div class="flex h-screen bg-gray-50 text-slate-800 overflow-hidden">
@@ -42,7 +49,7 @@ export interface OccurrenceItem {
         </main>
       </div>
     </div>
-  `
+  `,
 })
 export class MapaPageComponent {
   private router = inject(Router);
@@ -57,7 +64,7 @@ export class MapaPageComponent {
         'A calçada está danificada próximo à faixa de pedestres da SQN 208. O buraco dificulta a passagem de cadeirantes e pedestres.',
       categoria: 'Calçadas e vias',
       local: 'Asa Norte • Brasília, DF',
-      status: 'Pendente'
+      status: 'Pendente',
     },
     {
       id: '0246',
@@ -66,8 +73,8 @@ export class MapaPageComponent {
         'Poste apagado na quadra, reduzindo a visibilidade noturna para pedestres.',
       categoria: 'Iluminação pública',
       local: 'Asa Norte • Brasília, DF',
-      status: 'Pendente'
-    }
+      status: 'Pendente',
+    },
   ]);
 
   selectedId = linkedSignal(() => this.ocorrenciaId() ?? '0248');
