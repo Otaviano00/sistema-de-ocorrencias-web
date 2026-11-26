@@ -26,7 +26,7 @@ export interface OccurrenceDraft {
   imports: [SidebarComponent],
   template: `
     <div class="flex h-screen bg-gray-50 text-slate-800 overflow-hidden">
-      <app-sidebar activeItem="registrar" (navigate)="navigateTo($event)" />
+      <app-sidebar activeItem="registrar" />
 
       <div class="flex-1 flex flex-col min-w-0">
         <!-- Topbar -->

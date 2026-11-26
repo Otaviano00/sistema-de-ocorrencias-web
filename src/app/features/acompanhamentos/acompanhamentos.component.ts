@@ -22,7 +22,7 @@ import {InfoAvisosCardComponent} from './components/info-avisos-card/info-avisos
   template: `
     <div class="flex h-screen bg-gray-50 text-slate-800 overflow-hidden">
       <!-- Menu Lateral Global -->
-      <app-sidebar />
+      <app-sidebar activeItem="acompanhamentos"/>
 
       <!-- Conteúdo Principal -->
       <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">

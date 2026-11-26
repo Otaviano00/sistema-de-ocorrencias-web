@@ -1,4 +1,5 @@
-import {Component, input, output, signal} from '@angular/core';
+import {Component, input, signal} from '@angular/core';
+import {RouterLink, RouterLinkActive} from '@angular/router';
 
 export type NavItemId =
   | 'mapa'
@@ -17,6 +18,7 @@ interface NavItem {
 
 @Component({
   selector: 'app-sidebar',
+  imports: [RouterLink, RouterLinkActive],
   template: `
     <aside
       class="w-64 bg-white border-r border-gray-200 flex flex-col justify-between p-4 shrink-0 h-full"
@@ -48,20 +50,16 @@ interface NavItem {
           </p>
           <nav aria-label="Menu principal" class="space-y-1">
             @for (item of principalItems(); track item.id) {
-              <button
-                type="button"
-                (click)="navigate.emit(item.route)"
+              <a
+                [routerLink]="item.route"
+                routerLinkActive="bg-emerald-50 text-emerald-800 font-semibold"
+                [routerLinkActiveOptions]="{exact: false}"
                 [attr.aria-current]="activeItem() === item.id ? 'page' : null"
-                [class.bg-emerald-50]="activeItem() === item.id"
-                [class.text-emerald-800]="activeItem() === item.id"
-                [class.font-semibold]="activeItem() === item.id"
-                [class.text-gray-600]="activeItem() !== item.id"
-                [class.hover:bg-gray-100]="activeItem() !== item.id"
-                class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition text-left cursor-pointer"
+                class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition text-left cursor-pointer text-gray-600 hover:bg-gray-100"
               >
                 <span aria-hidden="true">{{ item.icon }}</span>
                 <span>{{ item.label }}</span>
-              </button>
+              </a>
             }
           </nav>
         </div>
@@ -74,20 +72,16 @@ interface NavItem {
           </p>
           <nav aria-label="Menu de gestão" class="space-y-1">
             @for (item of gestaoItems(); track item.id) {
-              <button
-                type="button"
-                (click)="navigate.emit(item.route)"
+              <a
+                [routerLink]="item.route"
+                routerLinkActive="bg-emerald-50 text-emerald-800 font-semibold"
+                [routerLinkActiveOptions]="{exact: false}"
                 [attr.aria-current]="activeItem() === item.id ? 'page' : null"
-                [class.bg-emerald-50]="activeItem() === item.id"
-                [class.text-emerald-800]="activeItem() === item.id"
-                [class.font-semibold]="activeItem() === item.id"
-                [class.text-gray-600]="activeItem() !== item.id"
-                [class.hover:bg-gray-100]="activeItem() !== item.id"
-                class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition text-left cursor-pointer"
+                class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition text-left cursor-pointer text-gray-600 hover:bg-gray-100"
               >
                 <span aria-hidden="true">{{ item.icon }}</span>
                 <span>{{ item.label }}</span>
-              </button>
+              </a>
             }
           </nav>
         </div>
@@ -106,7 +100,6 @@ interface NavItem {
 })
 export class SidebarComponent {
   activeItem = input<NavItemId>('mapa');
-  navigate = output<string>();
 
   principalItems = signal<NavItem[]>([
     {id: 'mapa', label: 'Mapa de ocorrências', icon: '🗺️', route: '/mapa'},
