@@ -18,7 +18,7 @@ import {ModerationDetailComponent} from './components/moderation-detail/moderati
   template: `
     <div class="flex h-screen bg-gray-50 text-slate-800 overflow-hidden">
       <!-- Menu Lateral Global -->
-      <app-sidebar />
+      <app-sidebar activeItem="moderacao" />
 
       <!-- Conteúdo Principal -->
       <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">

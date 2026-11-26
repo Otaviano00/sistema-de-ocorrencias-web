@@ -31,7 +31,7 @@ export interface OccurrenceItem {
   ],
   template: `
     <div class="flex h-screen bg-gray-50 text-slate-800 overflow-hidden">
-      <app-sidebar activeItem="mapa" (navigate)="navigateTo($event)" />
+      <app-sidebar activeItem="mapa" />
 
       <div class="flex-1 flex flex-col min-w-0">
         <app-header />
@@ -89,10 +89,6 @@ export class MapaPageComponent {
   selectOccurrence(idOrEvent: string | Event) {
     const id = typeof idOrEvent === 'string' ? idOrEvent : '0248';
     this.selectedId.set(id);
-    this.router.navigate(['/mapa', id]);
-  }
-
-  navigateTo(route: string) {
-    this.router.navigate([route]);
+    void this.router.navigate(['/mapa', id]);
   }
 }
